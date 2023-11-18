@@ -25,3 +25,5 @@ Depends:
 LazyData: true
 LitrVersionUsed: 0.9.0
 LitrId: 71279a2700a0890ba2761ca32849eedc
+URL: https://github.com/heike/kaggling
+BugReports: https://github.com/heike/kaggling/issues
