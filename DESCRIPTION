@@ -1,0 +1,27 @@
+Package: kaggling
+Title: Searches kaggles for data by keywords
+Version: 0.0.0.9000
+Authors@R: 
+    person("Heike", "Hofmann", , "hofmann@iastate.edu", role = c("aut", "cre"))
+Description: Kaggle is used as a platform to offer and participate in data
+    competitions by thousands of users. The platform features an easy
+    upload mechanism for data sets. To date almost 300k data sets are
+    available at the platform. This package provides access to a key-word
+    based search of available data sets based on the kaggle API.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    dplyr,
+    jsonlite,
+    purrr,
+    tibble
+Depends: 
+    R (>= 2.10)
+LazyData: true
+LitrVersionUsed: 0.9.0
+LitrId: 71279a2700a0890ba2761ca32849eedc
