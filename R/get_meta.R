@@ -2,10 +2,17 @@
 #'
 #' @param datasets either a dataset returned from the function `search_kaggle`
 #' or a (vector) of (character) references of the form <kaggle user>/<data set>.
+#' @param expand_meta boolean, should the set of meta information be returned as a
+#' list variable (default, `expand_meta` set to FALSE) or expanded into the data frame?
 #' @importFrom utils unzip
-#' @return tibble of the input expanded by a list column `meta`
+#' @importFrom tidyr unnest
+#' @return tibble of the input expanded by a list column `meta` (if `expand_meta` is set to FALSE).
+#' If `expand_meta` is set to TRUE, a set of about 40 variables from Kaggle's `dataset-metadata.json` file
+#' is added to the input.
+#' The names of all meta variables start with "meta_" an in-depth discussion of these variables
+#' can be found in Kaggle's [Dataset Metadata](https://github.com/Kaggle/kaggle-api/wiki/Dataset-Metadata) description.
 #' @export
-get_meta <- function(datasets) {
+get_meta <- function(datasets, expand_meta=FALSE) {
   # helper function
   get_meta_i <- function(ref_i) {
     tmp <- tempdir()
@@ -26,6 +33,7 @@ get_meta <- function(datasets) {
     flat_l  %>% data.frame()
   }
   ref <- NULL
+  meta <- NULL
 
   if (is.factor(datasets)) datasets <- as.character(datasets)
   if (is.character(datasets)) datasets <- data.frame(ref=datasets)
@@ -33,7 +41,9 @@ get_meta <- function(datasets) {
     stopifnot("ref" %in% names(datasets))
   }
 
-  datasets %>% mutate(
+  datasets <- datasets %>% mutate(
     meta = ref %>% purrr::map(.f = function(r) get_meta_i(r))
   ) %>% as_tibble()
+  if (expand_meta) datasets <- datasets %>% unnest(cols=meta, names_sep = "_")
+  datasets
 }

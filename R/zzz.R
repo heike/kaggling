@@ -1,15 +1,38 @@
-.onLoad <- function(libname, pkgname){
+.onAttach <- function(libname, pkgname){
 
-  message("where is kaggle installed?")
-  check_kaggle <- system("which kaggle")
-  if (check_kaggle != 0) {
-    message("\nNo installation of kaggle found. This package uses the kaggle API. Follow the installation instructions at https://github.com/Kaggle/kaggle-api#api-credentials.")
+  check_kaggle <- system("which kaggle", intern=TRUE,
+                         input = "")
+  packageStartupMessage("kaggle.py installed? ... yes")
+
+  if (check_kaggle == "") {
+    packageStartupMessage("kaggle.py installed? ... Error: no installation of kaggle found. This package uses the kaggle API. Follow the installation instructions at https://github.com/Kaggle/kaggle-api#api-credentials.")
     return()
   }
 
-  message("Is API use authorized? Address any warnings.")
-  check_api <- system("kaggle config view")
-  if (check_api != 0) {
+#  browser()
+  suppressWarnings({
+    check_api <- system2("kaggle", args= "config view", stdout=TRUE,
+                       stderr=TRUE)})
+
+  #ollow the installation instructions at https://github.com/Kaggle/kaggle-api#api-credentials."
+  error <- grep("OSError", check_api, value = TRUE) # "OSError: Could not find kaggle.json. Make sure it's located in /Users/hofmann/.kaggle. Or use the environment method."
+  warning <- grep("Warning", check_api, value = TRUE)
+
+  if (length(error)!=0) {
+  # there is an error
+    error <- gsub("Or use the environment method.", "Follow instructions at https://github.com/Kaggle/kaggle-api#api-credentials", error)
+    packageStartupMessage(paste0("Kaggle API use authorized? ... ", error))
+
     return()
   }
+  if (length(warning) != 0) {
+    packageStartupMessage(paste0("Kaggle API use authorized? ... ", warning))
+
+    return()
+  }
+
+  check_api <- try(system("kaggle config view", intern=TRUE,
+                      ignore.stderr = TRUE, ignore.stdout = TRUE), silent=TRUE)
+  packageStartupMessage("Kaggle API use authorized? ... yes")
 }
+

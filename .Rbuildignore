@@ -7,3 +7,4 @@
 ^pkgdown$
 ^data_raw$
 ^\.github$
+_cache$

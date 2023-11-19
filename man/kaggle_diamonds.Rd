@@ -26,7 +26,7 @@ the kaggle API. Those variables are:
 \item{lastUpdated}{date and time of the last update.}
 \item{downloadCount}{vector of integers of the number of downloads.}
 \item{voteCount}{vector of integers of the number of votes. }
-\item{usabilityRating}{vector of numeric values on a scale of 0 to 10 (extremely useable). }
+\item{usabilityRating}{vector of numeric values on a scale of 0 to 1 (extremely useable). }
 }
 The remaining 20 variables are part of the meta information uploaded with the datasets.
 Kaggle meta data is described at https://github.com/Kaggle/kaggle-api/wiki/Dataset-Metadata.
@@ -41,8 +41,8 @@ library(lubridate)
 
 # number of data sets related to 'diamond' by year
 kaggle_diamonds \%>\%
-    group_by(year = year(lastUpdated)) \%>\%
-    summarize(n = n()) \%>\%
-    ggplot(aes(x = year, weight = n)) + geom_bar()
+  group_by(year=year(lastUpdated)) \%>\%
+  summarize(n = n()) \%>\%
+  ggplot(aes(x = year, weight= n)) + geom_bar()
 }
 \keyword{datasets}

@@ -32,7 +32,7 @@ get_data <- function(datasets, check_size=TRUE) {
       while (!(char %in% c("y", "n"))) char <- scan(1)
       if (char == "n") return (data.frame(`No Data Reason`="Data too big"))
     }
-      browser()
+
     unzip(zipfile = file.path(tmp, paste0(basename(ref_i), ".zip")), files = csv_name)
     results <- read.csv(csv_name)
     results

@@ -4,14 +4,21 @@
 \alias{get_meta}
 \title{Download meta information for a kaggle dataset}
 \usage{
-get_meta(datasets)
+get_meta(datasets, expand_meta = FALSE)
 }
 \arguments{
 \item{datasets}{either a dataset returned from the function \code{search_kaggle}
 or a (vector) of (character) references of the form \if{html}{\out{<kaggle user>}}/\if{html}{\out{<data set>}}.}
+
+\item{expand_meta}{boolean, should the set of meta information be returned as a
+list variable (default, \code{expand_meta} set to FALSE) or expanded into the data frame?}
 }
 \value{
-tibble of the input expanded by a list column \code{meta}
+tibble of the input expanded by a list column \code{meta} (if \code{expand_meta} is set to FALSE).
+If \code{expand_meta} is set to TRUE, a set of about 40 variables from Kaggle's \code{dataset-metadata.json} file
+is added to the input.
+The names of all meta variables start with "meta_" an in-depth discussion of these variables
+can be found in Kaggle's \href{https://github.com/Kaggle/kaggle-api/wiki/Dataset-Metadata}{Dataset Metadata} description.
 }
 \description{
 Download meta information for a kaggle dataset
