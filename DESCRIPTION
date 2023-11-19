@@ -1,5 +1,5 @@
 Package: kaggling
-Title: Searches kaggles for data by keywords
+Title: Searches Kaggle Platform for Data by Keywords
 Version: 0.0.0.9000
 Authors@R: 
     person("Heike", "Hofmann", , "hofmann@iastate.edu", role = c("aut", "cre"))
@@ -23,7 +23,5 @@ Imports:
 Depends: 
     R (>= 2.10)
 LazyData: true
-LitrVersionUsed: 0.9.0
-LitrId: 71279a2700a0890ba2761ca32849eedc
 URL: https://github.com/heike/kaggling
 BugReports: https://github.com/heike/kaggling/issues
