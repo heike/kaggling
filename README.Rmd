@@ -28,19 +28,24 @@ You can install the development version of kaggling like so:
 remotes::install_github("heike/kaggling")
 ```
 
-## Example
+This package relies on a valid installation of `kaggle` (python 3 based package). 
+This includes a Kaggle account and authorization tokens for the API. 
+Refer to https://github.com/Kaggle/kaggle-api for installation instructions.
 
-This is a basic example which shows you how to solve a common problem:
+
+## Basic Usage
+
+
+Load the package functionality:
 
 ```{r example}
 library(kaggling)
-## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+The main functionality is centered on searching for data sets using a search key word:
 
-```{r cars}
-summary(cars)
+```{r}
+iris <- search_kaggle("iris")
 ```
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.

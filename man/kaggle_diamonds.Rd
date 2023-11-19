@@ -37,6 +37,7 @@ We removed any columns with duplicated data.
 # example code
 library(ggplot2)
 library(dplyr)
+library(lubridate)
 
 # number of data sets related to 'diamond' by year
 kaggle_diamonds \%>\%
