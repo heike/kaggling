@@ -106,7 +106,7 @@ get_meta(ames$ref[1])$meta
 #>   datasetId datasetSlug hasDatasetSlug ownerUser hasOwnerUser usabilityRating
 #> 1    545987     housing           TRUE marcopale         TRUE       0.9705882
 #>   hasUsabilityRating totalViews totalVotes totalDownloads
-#> 1               TRUE      22715         28           3450
+#> 1               TRUE      22728         28           3452
 #>                    title hasTitle              subtitle hasSubtitle
 #> 1 Ames Iowa Housing Data     TRUE for Regression Models        TRUE
 #>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 description

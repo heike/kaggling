@@ -2,7 +2,9 @@ Package: kaggling
 Title: Searches Kaggle Platform for Data by Keywords
 Version: 0.0.0.9000
 Authors@R: 
-    person("Heike", "Hofmann", , "hofmann@iastate.edu", role = c("aut", "cre"))
+    person("Heike", "Hofmann", , 
+           "hofmann@iastate.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-6216-5183"))
 Description: Kaggle is used as a platform to offer and participate in data
     competitions by thousands of users. The platform features an easy
     upload mechanism for data sets. To date almost 300k data sets are
