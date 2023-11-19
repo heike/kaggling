@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of kaggling is to ...
+The goal of kaggling is to get an overview of kaggle datasets and their provenance.
 
 ## Installation
 
@@ -42,18 +42,60 @@ Load the package functionality:
 library(kaggling)
 ```
 
+### Search kaggle
+
 The main functionality is centered on searching for data sets using a search key word:
 
+```{r cache=TRUE}
+ames <- search_kaggle("ames iowa housing")
+dim(ames)
+```
+Kaggle hosts `r nrow(ames)` data sets that are found as a result of a search on 'ames iowa housing'.
+
+
 ```{r}
-iris <- search_kaggle("iris")
+head(ames)
+```
+```{r message=FALSE}
+library(tidyverse)
+
+# the majority of the datasets has a size of about 200 KB. 
+ames %>% mutate(
+  size = parse_number(size)
+) %>% ggplot(aes(x = size)) + geom_histogram()
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
 
-You can also embed plots, for example:
+### Get Meta information 
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+The data set identifier is stored in the variable `ref`. 
+
+```{r}
+ames$ref[1]
+```
+Meta information is extracted from kaggle using the function `get_meta`.
+
+```{r}
+# single set of meta information
+get_meta(ames$ref[1])$meta
+```
+`get_meta` expands the dataset by the list variable `meta`. 
+
+```{r cache=TRUE}
+ames <- get_meta(ames)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+```{r}
+ames_meta <- ames %>% tidyr::unnest(cols=meta, names_sep="_")
+
+# There is a plethora of licenses involved
+ames_meta %>% count(meta_licenses.name)
+```
+
+<!--
+Unfortunately, neither of these 35 very similar looking data files mention ISU StatCom or Dean De Cock's 2011 paper [Ames, Iowa: Alternative to the Boston Housing Data as an End of Semester Regression Project](https://www.tandfonline.com/doi/epdf/10.1080/10691898.2011.11889627?needAccess=true) in the Journal of Statistics Education.
+
+https://jse.amstat.org/v19n3/decock/AmesHousing.txt
+https://jse.amstat.org/v19n3/decock/DataDocumentation.txt
+
+-->
