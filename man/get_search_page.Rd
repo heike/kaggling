@@ -4,14 +4,12 @@
 \alias{get_search_page}
 \title{Helper function: get page X from the search results}
 \usage{
-get_search_page(search_str, page, quiet = TRUE)
+get_search_page(search_str, page)
 }
 \arguments{
 \item{search_str}{character value, key word of the search}
 
 \item{page}{integer value, page number}
-
-\item{quiet}{boolean, does the function keep (debugging) messages to itself, defaults to TRUE}
 }
 \value{
 data.frame

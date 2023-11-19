@@ -16,11 +16,21 @@ get_meta <- function(datasets, expand_meta=FALSE) {
   # helper function
   get_meta_i <- function(ref_i) {
     tmp <- tempdir()
+    tmp_err <- tempfile()
 
     # kaggle_cmd <- sprintf("kaggle datasets metadata -p %s-meta/%s %s", search_string, ref_i, ref_i)
-    kaggle_cmd <- sprintf("kaggle datasets metadata -p %s %s", tmp, ref_i)
+    kaggle_args <- sprintf("datasets metadata -p %s %s", tmp, ref_i)
 
-    system(kaggle_cmd) # this only works if ref_i is valid
+    # this only works if ref_i is valid
+    check_meta <- system2("kaggle", args=kaggle_args, stderr=tmp_err, stdout=TRUE)
+
+    warning <- grep("Warning: Your Kaggle API", check_meta, value=TRUE) # surpress
+    error <- grep("Error", readLines(tmp_err), value=TRUE)
+    if (length(error) != 0) {
+      # stop with error message
+      stop(error)
+    }
+
     dir(tmp, pattern="dataset-metadata.json", recursive = TRUE, full.names = TRUE)
     l <- jsonlite::read_json(file.path(tmp, "dataset-metadata.json"))
     flat_l <- purrr::list_flatten(l)

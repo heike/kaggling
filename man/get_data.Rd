@@ -13,7 +13,7 @@ or a (vector) of (character) references of the form \if{html}{\out{<kaggle user>
 \item{check_size}{boolean, check that the size is not in GB}
 }
 \value{
-tibble of the input expanded by a list variable \code{data}
+tibble of the input expanded by a list variable \code{data}.
 }
 \description{
 Download a kaggle dataset
