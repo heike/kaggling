@@ -1,12 +1,16 @@
 .onAttach <- function(libname, pkgname){
 
-  check_kaggle <- system("which kaggle", intern=TRUE,
-                         input = "")
-  packageStartupMessage("kaggle.py installed? ... yes")
+  check_kaggle <- system2("which", args = "kaggle", input = "", stdout=T)
 
   if (check_kaggle == "") {
-    packageStartupMessage("kaggle.py installed? ... Error: no installation of kaggle found. This package uses the kaggle API. Follow the installation instructions at https://github.com/Kaggle/kaggle-api#api-credentials.")
+    packageStartupMessage(
+      "kaggle.py installed? ... Error: no installation of kaggle found.
+      This package uses the kaggle API.
+      Follow the installation instructions at
+      https://github.com/Kaggle/kaggle-api#api-credentials.")
     return()
+  } else {
+    packageStartupMessage("kaggle.py installed? ... yes")
   }
 
 #  browser()
@@ -14,8 +18,8 @@
     check_api <- system2("kaggle", args= "config view", stdout=TRUE,
                        stderr=TRUE)})
 
-  #ollow the installation instructions at https://github.com/Kaggle/kaggle-api#api-credentials."
-  error <- grep("OSError", check_api, value = TRUE) # "OSError: Could not find kaggle.json. Make sure it's located in /Users/hofmann/.kaggle. Or use the environment method."
+  #follow the installation instructions at https://github.com/Kaggle/kaggle-api#api-credentials."
+  error <- grep("OSError", check_api, value = TRUE) # "OSError: Could not find kaggle.json. Make sure it's located in ~/.kaggle. Or use the environment method."
   warning <- grep("Warning", check_api, value = TRUE)
 
   if (length(error)!=0) {
