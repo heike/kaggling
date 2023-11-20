@@ -1,6 +1,7 @@
 .onAttach <- function(libname, pkgname){
-
-  check_kaggle <- system2("which", args = "kaggle", input = "", stdout=T)
+  suppressWarnings({
+  check_kaggle <- system2("which", args = "kaggle", input = "", stdout=T, stderr = T)
+  })
 
   if (check_kaggle == "") {
     packageStartupMessage(
