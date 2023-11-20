@@ -41,8 +41,8 @@ library(lubridate)
 
 # number of data sets related to 'diamond' by year
 kaggle_diamonds \%>\%
-  group_by(year=year(lastUpdated)) \%>\%
-  summarize(n = n()) \%>\%
-  ggplot(aes(x = year, weight= n)) + geom_bar()
+    group_by(year = year(lastUpdated)) \%>\%
+    summarize(n = n()) \%>\%
+    ggplot(aes(x = year, weight = n)) + geom_bar()
 }
 \keyword{datasets}
