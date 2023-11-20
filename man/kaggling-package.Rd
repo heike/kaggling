@@ -19,5 +19,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Heike Hofmann \email{hofmann@iastate.edu} (\href{https://orcid.org/0000-0001-6216-5183}{ORCID})
 
+Authors:
+\itemize{
+  \item Susan Vanderplas \email{srvander@iastate.edu} (\href{https://orcid.org/0000-0002-3803-0972}{ORCID})
+}
+
 }
 \keyword{internal}

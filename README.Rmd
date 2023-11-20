@@ -98,4 +98,7 @@ Unfortunately, neither of these 35 very similar looking data files mention ISU S
 https://jse.amstat.org/v19n3/decock/AmesHousing.txt
 https://jse.amstat.org/v19n3/decock/DataDocumentation.txt
 
+package AmesHousing (with citation of DeCock) by Max Kuhn on CRAN since 2017-09-26 11:46	154K
+first Ames Housing data is on kaggle since 2018-01-06; AmesHousing is published with GPL-2
+
 -->
