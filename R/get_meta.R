@@ -52,7 +52,7 @@ get_meta <- function(datasets, expand_meta=FALSE) {
   }
 
   datasets <- datasets %>% mutate(
-    meta = ref %>% purrr::map(progress=TRUE,
+    meta = ref %>% purrr::map(.progress=TRUE,
       .f = function(r) get_meta_i(r))
   ) %>% as_tibble()
   if (expand_meta) datasets <- datasets %>% unnest(cols=meta, names_sep = "_")
