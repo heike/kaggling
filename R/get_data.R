@@ -45,9 +45,8 @@ get_data <- function(datasets, check_size=TRUE) {
     }
 
     unzip(zipfile = file.path(tmp, paste0(basename(ref_i), ".zip")), files = csv_name)
-    if (length(csv_name) > 1) results <- lapply(csv_name, read.csv)
-    else results <- read.csv(csv_name)
-
+    results <- lapply(csv_name, read.csv)
+    names(results) <- csv_name
     results
   }
 
