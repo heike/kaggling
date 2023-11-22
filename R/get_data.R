@@ -44,8 +44,10 @@ get_data <- function(datasets, check_size=TRUE) {
       if (char == "n") return (data.frame(`No Data Reason`="Data too big"))
     }
 
-    unzip(zipfile = file.path(tmp, paste0(basename(ref_i), ".zip")), files = csv_name)
-    results <- lapply(csv_name, read.csv)
+    unzip(zipfile = file.path(tmp, paste0(basename(ref_i), ".zip")),
+          files = csv_name, exdir=tmp, overwrite = TRUE)
+
+    results <- lapply(csv_name, FUN = function(file) read.csv(file.path(tmp, file)))
     names(results) <- csv_name
     results
   }
@@ -60,11 +62,10 @@ get_data <- function(datasets, check_size=TRUE) {
     if (check_size) stopifnot("size" %in% names(datasets))
     if (!("size" %in% names(datasets))) datasets$size <- "dummy value"
   }
-#  browser()
   datasets %>% mutate(
     data = purrr::map2(.x = ref, .y=size, .f = function(r, s) {
       if (length(grep("GB", s) > 0))  return(data.frame(`No Data Reason`="Data too big"))
 
-      get_data_i(r)})
+      get_data_i(r)}, .progress=TRUE)
   ) %>% as_tibble()
 }
